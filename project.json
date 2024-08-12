@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "authors": ["Alexandre <sushi@waveplay.com>"],
+  "langrev": "1",
+  "warnings": ["no-unused"],
+  "sources": ["./src/**"],
+  "dependency-search-paths": ["lib"],
+  "dependencies": [],
+  "cc": "cc",
+  "targets": {
+    "native": {
+      "type": "executable",
+      "output": "native"
+    },
+    "pasm": {
+      "type": "executable",
+      "reloc": "none",
+      "target": "wasm32",
+      "link-args": ["g0"],
+      "output": "wasm",
+      "link-libc": false,
+      "use-stdlib": false,
+      "no-entry": true
+    }
+  }
+}
