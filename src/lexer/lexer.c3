@@ -31,7 +31,7 @@ fn void lexer(String css){
     for(usz i = 0; i < css.len; ++i){
         char c = css[i];
         usz idx = i;
-        if(c == ' ' || c == '\n' || c == '\r' ||  c == ':' || c == ';' || buffer.str_view() == "\uFEFF"  || buffer.str_view() == "\x0D"){
+        if(c == ' ' || c == '\n' || c == '\r' ||  c == ':' || c == ';' || buffer.str_view() == "\uFEFF"  || buffer.str_view() == "\x0D" || buffer.str_view() == "0x20"){
             String strc = buffer.copy_str();
             tokens.push( TokenData {
                 .tokenType  = dstring::new("IDENTIFIER"),
@@ -102,10 +102,13 @@ fn void lexer(String css){
     }
 
     foreach (element : tokens){
-        // io::print(element);
-        // io::print("\r\n");
-        
-        io::printfn("%s start: %d - end: %d", element.token, element.start, element.end);
+        foreach (char c : element.token.str_view()){
+            io::printf("0x%x start: %d - end: %d", c, element.start, element.end);
+        }
+
+         
+
+        //io::printf("0x%x start: %d - end: %d", element.token, element.start, element.end); prints every string and there is the space
         
         element.tokenType.free();
         element.token.free();
